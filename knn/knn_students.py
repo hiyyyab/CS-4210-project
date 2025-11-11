@@ -80,11 +80,12 @@ np.random.seed(42)
 # Split data into training and test sets
 # test_size=0.3: Specifies that 30% of the data should be allocated  
 # to the testing set and 70% will be used for training
-# X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3)
-X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3, stratify=y)
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3)
+# X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3, stratify=y)
 
 # Initialize model with k=3
 studentsKnn = KNeighborsClassifier(n_neighbors=9)
+# studentsKnn = KNeighborsClassifier(n_neighbors=9, weights='distance')
 '''
 k = 3
 without stratify: Accuracy score is 0.587
@@ -92,7 +93,11 @@ with stratify: Accuracy score is 0.584
 
 k = 9 
 without stratify: Accuracy score is 0.605
-with stratify: 
+with stratify: Accuracy score is 0.614
+
+k = 9 and weights='distance'
+without stratify: Accuracy score is 0.608
+with stratify: Accuracy score is 0.622
 
 k = 11 
 without stratify: Accuracy score is 0.610

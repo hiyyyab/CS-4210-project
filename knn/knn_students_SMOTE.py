@@ -51,6 +51,10 @@ y_pred = studentsKnn.predict(X_test)
 # note that it can be misleading with imbalanced data, should check others (done below)
 score = studentsKnn.score(X_test, np.ravel(y_test))
 
+# Print accuracy score
+print('Accuracy score is ', end="")
+print('%.3f' % score)
+
 # gives info about precision, recall, and F1-score
 print(classification_report(y_test, y_pred))
 
