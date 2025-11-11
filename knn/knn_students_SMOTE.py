@@ -29,7 +29,7 @@ smote = SMOTE(random_state=42)
 # Split data into training and test sets
 # test_size=0.3: Specifies that 30% of the data should be allocated  
 # to the testing set and 70% will be used for training
-X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3, random_state= 42, stratify=y)
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3, random_state=42, stratify=y)
 
 # only apply resampling to training data (doing so for testing will skew results)
 X_resampling, y_resampling = smote.fit_resample(X_train, y_train)
