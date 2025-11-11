@@ -13,7 +13,7 @@ students = pd.read_csv('data.csv', sep=';')
 # students['u_g'] = students['u'] - students['g']
 
 # Create dataframe X with features redshift and u_g
-X = students[['Previous qualification', 'Unemployment rate']]
+X = students.drop('Target', axis=1)
 
 # Create dataframe y with feature class
 y = students[['Target']] 
@@ -26,9 +26,10 @@ np.random.seed(42)
 # Split data into training and test sets
 # test_size=0.3: Specifies that 30% of the data should be allocated  
 # to the testing set and 70% will be used for training
-X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3, stratify=y)
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3)
 
 # Initialize model with k=3
+
 studentsKnn = KNeighborsClassifier(n_neighbors=3)
 '''
 without stratify: Accuracy score is 0.476
