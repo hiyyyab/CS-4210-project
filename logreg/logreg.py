@@ -7,6 +7,8 @@ from sklearn.linear_model import LogisticRegression
 from mlxtend.plotting import plot_decision_regions
 from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import StandardScaler
+from sklearn.metrics import confusion_matrix, ConfusionMatrixDisplay
+
 
 # read in the csv file
 data = pd.read_csv("data.csv")
@@ -58,3 +60,24 @@ print("Training score is:", logisticModel.score(X_train_scaled, y_train))
 # evaluate on test data
 logisticModel.score(X_test_scaled, y_test)
 print("Test score is:", logisticModel.score(X_test_scaled, y_test))
+
+#confusion matrix
+
+#test data prediction
+y_pred = logisticModel.predict(X_test_scaled)
+
+#compute matrix
+cm = confusion_matrix(y_test, y_pred)
+
+# class labels
+labels = ["Graduate", "Dropout", "Enrolled"]
+
+# plot confusion matrix
+plt.figure(figsize=(6, 5))
+sns.heatmap(cm, annot=True, fmt="d", cmap="Blues",
+            xticklabels=labels, yticklabels=labels)
+plt.title("Confusion Matrix - Logistic Regression")
+plt.xlabel("Predicted Label")
+plt.ylabel("True Label")
+plt.show()
+
