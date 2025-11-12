@@ -2,6 +2,7 @@
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
+import seaborn as sns
 
 # Import packages for evaluation
 from sklearn.neighbors import KNeighborsClassifier
@@ -72,20 +73,23 @@ X = students.drop('Target', axis=1)
 # Create dataframe y 
 y = students[['Target']] 
 
-# Sets the random seed for NumPy's random number generator to 42. 
-# Setting a seed ensures that the random splitting of data is reproducible, 
-# the same data points will be assigned to the training and testing sets
-np.random.seed(42)
+# Trying to view the graph of plots... 
+p = sns.scatterplot(data=students, x='Unemployment rate', y='GDP',
+                    hue='Target', style='Target')
+p.set_xlabel('Unemployment rate', fontsize=14)
+p.set_ylabel('GDP', fontsize=14)
+p.legend(title='Target')
+plt.show()
 
 # Split data into training and test sets
-# test_size=0.3: Specifies that 30% of the data should be allocated  
-# to the testing set and 70% will be used for training
-X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3)
+# random=42: Sets the random seed for NumPy's random number generator to 42, ensuring the random split of data is reproducible
+# test_size=0.3: Specifies that 30% of the data for testing set and 70% for training set 
+X_train, X_test, y_train, y_test = train_test_split(X, y, random_state=42, test_size=0.3)
 # X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3, stratify=y)
 
 # Initialize model with k=3
-studentsKnn = KNeighborsClassifier(n_neighbors=9)
-# studentsKnn = KNeighborsClassifier(n_neighbors=9, weights='distance')
+# studentsKnn = KNeighborsClassifier(n_neighbors=9)
+studentsKnn = KNeighborsClassifier(n_neighbors=9, weights='distance')
 '''
 k = 3
 without stratify: Accuracy score is 0.587
@@ -121,12 +125,14 @@ score = studentsKnn.score(X_test, np.ravel(y_test))
 # Print accuracy score
 print('Accuracy score is ', end="")
 print('%.3f' % score)
+print()
+print(students['Target'].value_counts())
 
-# Gives info about precision, recall, and F1-score
-print(classification_report(y_test, y_pred))
+# # Gives info about precision, recall, and F1-score
+# print(classification_report(y_test, y_pred))
 
-# Confusion matrix
-cm = confusion_matrix(y_test, y_pred)
-disp = ConfusionMatrixDisplay(confusion_matrix=cm, display_labels=['Dropout', 'Enrolled', 'Graduate'])
-disp.plot()
-plt.show()
+# # Confusion matrix
+# cm = confusion_matrix(y_test, y_pred)
+# disp = ConfusionMatrixDisplay(confusion_matrix=cm, display_labels=['Dropout', 'Enrolled', 'Graduate'])
+# disp.plot()
+# plt.show()
