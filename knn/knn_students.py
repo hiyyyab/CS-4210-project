@@ -12,6 +12,7 @@ from sklearn.metrics import confusion_matrix, ConfusionMatrixDisplay
 
 # Load the dataset
 students = pd.read_csv('data.csv', sep=';')
+# students = pd.read_csv('data.csv', sep=';') # This was causing a break for some reason?
 
 '''
 # ** Section to find optimal K - Elbow Method ** 
