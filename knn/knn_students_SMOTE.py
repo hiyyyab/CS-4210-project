@@ -1,3 +1,7 @@
+# NOTE: SMOTE was deemed inefficient for knn here, stratify=y did job well enough
+# found SMOTE to potentially be creating instances that were not as accurate to the data
+# and therefore was not used for remainder of KNN evaluation
+
 # Import needed packages for classification
 import numpy as np
 import pandas as pd
@@ -36,10 +40,6 @@ X_resampling, y_resampling = smote.fit_resample(X_train, y_train)
 
 # Initialize model with k=9 (tested a couple others, 9 had 'best')
 studentsKnn = KNeighborsClassifier(n_neighbors=9, weights='distance')
-'''
-without stratify: Accuracy score is 0.476
-with stratify: Accuracy score is 0.428
-'''
 
 # Fit model using X_train and y_train
 studentsKnn.fit(X_resampling, np.ravel(y_resampling))
